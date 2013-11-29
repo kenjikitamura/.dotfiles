@@ -246,4 +246,8 @@ export PATH="~/bin:/usr/local/heroku/bin:$PATH"
 [ -f $ZDOTDIR/.zshrc_local ] && . $ZDOTDIR/.zshrc_local
 
 # lv使うとgit diffのカラーコードが表示できない問題の対応
-export GIT_PAGER="less"
+export GIT_PAGER=less
+if [[ -x `whence -p lv` ]]; then
+  export GIT_PAGER="lv -c"
+fi
+
