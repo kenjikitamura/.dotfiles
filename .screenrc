@@ -1,0 +1,31 @@
+defutf8 on
+defencoding utf8
+encoding utf-8 utf-8
+
+escape ^t^t
+#hardstatus alwayslastline "[screen %n: %t] %h"
+#hardstatus string "[screen %n: %t] %h"
+caption always "%{=b wk} %-w%{=bu db}%n %t%{-}%+w %= %{=b wb}%y/%m/%d"
+
+
+bind ^T other
+
+bind o focus
+
+
+termcapinfo kterm 'hs:ts=\E[?2S\E[?E\E[?%i%dT:fs=\E[?F:es:ds=\E[?E'
+
+bind ^U encoding utf-8
+
+bind ^E encoding euc
+
+
+defbce "on"
+term xterm-256color
+
+vbell off
+
+
+defscrollbask 50000
+
+logfile "$HOME/.screen/screen%d_%m(%y).log"
