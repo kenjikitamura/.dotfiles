@@ -237,10 +237,13 @@ if [ -d ${HOME}/.rbenv ]; then
 fi
 
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="~/bin:/usr/local/heroku/bin:$PATH"
 
 ## 各環境毎の設定を読み込む
 [ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
 
 ## ローカルの設定を読み込む
 [ -f $ZDOTDIR/.zshrc_local ] && . $ZDOTDIR/.zshrc_local
+
+# lv使うとgit diffのカラーコードが表示できない問題の対応
+export GIT_PAGER="less"
