@@ -1,5 +1,5 @@
 # zshrc for Mac
 
-PATH=~/bin:$JAVA_HOME/bin:/usr/local/Cellar/emacs/23.3b/bin/:/Users/kitamura/Documents/android-sdk-mac_x86/platform-tools:"${PATH}"
+PATH=~/bin:$JAVA_HOME/bin:/usr/local/Cellar/emacs/24.3/bin/:/Users/kitamura/Documents/android-sdk-mac_x86/platform-tools:"${PATH}"
 PATH=/Users/kitamura/Documents/SDKs/android-ndk-r7/:/Users/kitamura/Documents/SDKs/android-sdk-macosx/tools:"${PATH}"
 export PATH
