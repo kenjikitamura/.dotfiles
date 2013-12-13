@@ -203,13 +203,13 @@ export JAVA_HOME
 alias lv='lv -c'
 
 # emacs
-alias emacs='emacs -nw'
+#alias emacs='emacs -nw'
 
 #screen
 alias screen='screen -xR'
 
 # PAGER
-export PAGER=lv
+export PAGER='lv -c'
 
 alias -g L='| lv -c'
 alias -g H='| head'
