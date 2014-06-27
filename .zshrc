@@ -35,7 +35,7 @@ colors
 #    ;;
 #esac
 
-PROMPT="%B%{${fg[green]}%}%n@%m %{${fg[blue]}%}%(5~,%-2~/.../%2~,%~) %(!.#.$)%{${reset_color}%}%b "
+PROMPT="%B%{${fg[green]}%}%n@%m %{${fg[blue]}%}%(9~,%-3~/.../%3~,%~) %(!.#.$)%{${reset_color}%}%b "
 
 # auto change directory
 #
