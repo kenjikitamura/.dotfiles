@@ -2,4 +2,5 @@
 
 PATH=~/bin:$JAVA_HOME/bin:/usr/local/bin:/Users/kitamura/Documents/android-sdk-mac_x86/platform-tools:"${PATH}"
 PATH=/Users/kitamura/Documents/SDKs/android-ndk-r7:/Users/kitamura/Documents/SDKs/android-sdk-macosx/tools:"${PATH}"
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH
