@@ -18,22 +18,6 @@ export TERM=xterm-256color
 #
 autoload colors
 colors
-#case ${UID} in
-#0)
-#    PROMPT="%B%{${fg[green]}%}%/#%{${reset_color}%}%b "
-#    PROMPT2="%B%{${fg[red]}%}%_#%{${reset_color}%}%b "
-#    SPROMPT="%B%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%}%b "
-#    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-#        PROMPT="%{${fg[cyan]}%}$(echo ${HOST%%.*} | tr '[a-z]' '[A-Z]') ${PROMPT}"
-#    ;;
-#*)
-#    PROMPT="%{${fg[blue]}%}%(5~,%-2~/.../%2~,%~) %(!.#.$)%{${reset_color}%} "
-#    PROMPT2="%{${fg[red]}%}%_%%%{${reset_color}%} "
-#    SPROMPT="%{${fg[red]}%}%r is correct? [n,y,a,e]:%{${reset_color}%} "
-#    [ -n "${REMOTEHOST}${SSH_CONNECTION}" ] && 
-#        PROMPT="%B%{${fg[green]}%}%n@%m ${PROMPT}%b"
-#    ;;
-#esac
 
 PROMPT="%B%{${fg[green]}%}%n@%m %{${fg[blue]}%}%(9~,%-3~/.../%3~,%~) %(!.#.$)%{${reset_color}%}%b "
 
@@ -196,9 +180,6 @@ kterm*|xterm*)
     ;;
 esac
 
-JAVA_HOME=/usr/local/java/jdk1.7.0_03
-export JAVA_HOME
-
 # lv
 alias lv='lv -c'
 
@@ -251,3 +232,10 @@ if [[ -x `whence -p lv` ]]; then
   export GIT_PAGER="lv -c"
 fi
 
+# Android Studio
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
+
+# Java ( brew install openjdk@21 )
+export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
