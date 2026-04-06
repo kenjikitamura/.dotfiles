@@ -184,7 +184,7 @@ esac
 alias lv='lv -c'
 
 # emacs
-#alias emacs='emacs -nw'
+alias emacs='emacs -nw'
 
 #screen
 alias screen='screen -xR'
