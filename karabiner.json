@@ -14,9 +14,9 @@
                         "manipulators": [
                             {
                                 "from": {
-                                    "key_code": "6",
+                                    "key_code": "y",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["command"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
@@ -25,9 +25,9 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "7",
+                                    "key_code": "u",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["command"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
@@ -36,9 +36,9 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "8",
+                                    "key_code": "i",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["command"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
@@ -47,9 +47,9 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "9",
+                                    "key_code": "o",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["command"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
@@ -58,9 +58,9 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "0",
+                                    "key_code": "p",
                                     "modifiers": {
-                                        "mandatory": ["control"],
+                                        "mandatory": ["command"],
                                         "optional": ["caps_lock"]
                                     }
                                 },
