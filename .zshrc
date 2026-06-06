@@ -239,3 +239,12 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 # Java ( brew install openjdk@21 )
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
 export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/kitamura/.lmstudio/bin"
+# End of LM Studio CLI section
+
+export PATH="$PATH:/Users/kitamura/.local/bin"
+export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"
