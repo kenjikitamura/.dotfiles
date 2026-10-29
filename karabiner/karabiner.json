@@ -2,13 +2,98 @@
     "profiles": [
         {
             "complex_modifications": {
-                "parameters": {
-                    "basic.simultaneous_threshold_milliseconds": 0,
-                    "basic.to_delayed_action_delay_milliseconds": 0,
-                    "basic.to_if_alone_timeout_milliseconds": 200,
-                    "basic.to_if_held_down_threshold_milliseconds": 0
-                },
+                "parameters": { "basic.simultaneous_threshold_milliseconds": 60 },
                 "rules": [
+                    {
+                        "description": "［ US ］左右のコマンドキー（⌘）を、単独で押したときは 英数・かな キー として扱う（左⌘は 英数、右⌘は かな）",
+                        "manipulators": [
+                            {
+                                "description": " LEFT COMMAND → EISUU ",
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_command" }],
+                                "to_if_alone": [{ "key_code": "japanese_eisuu" }],
+                                "type": "basic"
+                            },
+                            {
+                                "description": " RIGHT COMMAND → KANA ",
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_command" }],
+                                "to_if_alone": [{ "key_code": "japanese_kana" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "英数(左⌘) + v/c/f/b → Command + v/c/f/b",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "left_command" },
+                                        { "key_code": "v" }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "v",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "left_command" },
+                                        { "key_code": "c" }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "c",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "left_command" },
+                                        { "key_code": "f" }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "f",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "left_command" },
+                                        { "key_code": "b" }
+                                    ]
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "b",
+                                        "modifiers": ["command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
                     {
                         "description": "Open App",
                         "manipulators": [
