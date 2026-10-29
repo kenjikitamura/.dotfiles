@@ -110,17 +110,6 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "u",
-                                    "modifiers": {
-                                        "mandatory": ["command"],
-                                        "optional": ["caps_lock"]
-                                    }
-                                },
-                                "to": [{ "shell_command": "open '/Applications/Path Finder.app'" }],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
                                     "key_code": "i",
                                     "modifiers": {
                                         "mandatory": ["command"],
