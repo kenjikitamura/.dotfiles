@@ -21,6 +21,16 @@ colors
 
 PROMPT="%B%{${fg[green]}%}%n@%m %{${fg[blue]}%}%(9~,%-3~/.../%3~,%~) %(!.#.$)%{${reset_color}%}%b "
 
+# show current git branch on the right prompt
+#
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git:*' formats '%F{green}(%b)%f'
+zstyle ':vcs_info:git:*' actionformats '%F{yellow}(%b|%a)%f'
+precmd_functions+=(vcs_info)
+setopt prompt_subst
+RPROMPT='${vcs_info_msg_0_}'
+
 # auto change directory
 #
 setopt auto_cd
