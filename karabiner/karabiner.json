@@ -140,6 +140,17 @@
                                 },
                                 "to": [{ "shell_command": "open '/Applications/Slack.app'" }],
                                 "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "u",
+                                    "modifiers": {
+                                        "mandatory": ["command"],
+                                        "optional": ["caps_lock"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open '/Applications/Tansu.app'" }],
+                                "type": "basic"
                             }
                         ]
                     },
