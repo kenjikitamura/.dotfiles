@@ -197,12 +197,25 @@ alias -g A='| awk'
 stty stop undef
 stty start undef
 
-# tmux の中だけ、実行したコマンドで tmux の Window 名を変更する
-# （tmux の外で送ると、端末によってはエスケープシーケンスが画面に出てしまう）
-preexec(){
-    [[ -n "$TMUX" ]] || return
-    echo -ne "\ek${HOST%%.*}:${1%% *}\e\\"
-}
+# tmux の中だけ、Window 名を「実行中はコマンド名、待っている間はディレクトリ名」にする
+# tmux の自動命名 (automatic-rename) は名前の反映が遅れるため、zsh から直接送る
+# （~/.tmux.conf の allow-rename on が必要）
+if [[ -n "$TMUX" ]]; then
+    autoload -Uz add-zsh-hook
+    _tmux_window_name_preexec() {
+        # 実行するコマンドラインの最初の単語 (コマンド名)
+        printf '\ek%s\e\\' "${${(z)1}[1]}"
+    }
+    _tmux_window_name_precmd() {
+        if [[ "$PWD" == "$HOME" ]]; then
+            printf '\ek%s\e\\' '~'
+        else
+            printf '\ek%s\e\\' "${PWD:t}"
+        fi
+    }
+    add-zsh-hook preexec _tmux_window_name_preexec
+    add-zsh-hook precmd _tmux_window_name_precmd
+fi
 
 if [ -d ${HOME}/.rbenv ]; then
   export PATH=$HOME/.rbenv/bin:$PATH
