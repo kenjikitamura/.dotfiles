@@ -202,16 +202,29 @@ stty start undef
 # （~/.tmux.conf の allow-rename on が必要）
 if [[ -n "$TMUX" ]]; then
     autoload -Uz add-zsh-hook
+    # 今のディレクトリ名 (ホームは ~)
+    _tmux_window_dir() {
+        if [[ "$PWD" == "$HOME" ]]; then
+            print -rn -- '~'
+        else
+            print -rn -- "${PWD:t}"
+        fi
+    }
     _tmux_window_name_preexec() {
         # 実行するコマンドラインの最初の単語 (コマンド名)
-        printf '\ek%s\e\\' "${${(z)1}[1]}"
+        # (1 語だけのときに文字列扱いにならないよう、配列に分けてから取り出す)
+        local -a words=(${(z)1})
+        # 前に付いた環境変数の代入 (FOO=1 make の FOO=1) は飛ばす
+        while (( ${#words} > 1 )) && [[ "${words[1]}" =~ '^[A-Za-z_][A-Za-z0-9_]*=' ]]; do
+            shift words
+        done
+        local cmd="${words[1]}"
+        # Claude Code はどのリポジトリで動いているかがわかるよう、ディレクトリ名も付ける
+        [[ "$cmd" == claude ]] && cmd="claude:$(_tmux_window_dir)"
+        printf '\ek%s\e\\' "$cmd"
     }
     _tmux_window_name_precmd() {
-        if [[ "$PWD" == "$HOME" ]]; then
-            printf '\ek%s\e\\' '~'
-        else
-            printf '\ek%s\e\\' "${PWD:t}"
-        fi
+        printf '\ek%s\e\\' "$(_tmux_window_dir)"
     }
     add-zsh-hook preexec _tmux_window_name_preexec
     add-zsh-hook precmd _tmux_window_name_precmd
