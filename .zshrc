@@ -197,8 +197,10 @@ alias -g A='| awk'
 stty stop undef
 stty start undef
 
-# for screen 実行したコマンドで、ScreenのWindow名を変更する
+# tmux の中だけ、実行したコマンドで tmux の Window 名を変更する
+# （tmux の外で送ると、端末によってはエスケープシーケンスが画面に出てしまう）
 preexec(){
+    [[ -n "$TMUX" ]] || return
     echo -ne "\ek${HOST%%.*}:${1%% *}\e\\"
 }
 
