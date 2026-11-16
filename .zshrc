@@ -10,16 +10,15 @@
 #
 export LANG=ja_JP.UTF-8
 
-export TERM=xterm-256color
+# TERM はターミナル側に任せる（.zshrc で上書きしない）
+#   iTerm2: Profiles > Terminal > Report terminal type = xterm-256color
+#   tmux  : ~/.tmux.conf で set -g default-terminal "tmux-256color"
 
 ## Default shell configuration
 #
 # set prompt
 #
-autoload colors
-colors
-
-PROMPT="%B%{${fg[green]}%}%n@%m %{${fg[blue]}%}%(9~,%-3~/.../%3~,%~) %(!.#.$)%{${reset_color}%}%b "
+PROMPT="%B%F{green}%n@%m %F{blue}%(9~,%-3~/.../%3~,%~) %(!.#.$)%f%b "
 
 # show current git branch on the right prompt
 #
@@ -58,7 +57,7 @@ setopt nolistbeep
 
 ## Keybind configuration
 #
-# emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes 
+# emacs like keybind (e.x. Ctrl-a goes to head of a line and Ctrl-e goes
 #   to end of it)
 #
 bindkey -e
@@ -136,7 +135,7 @@ darwin*)
 freebsd*)
     case ${UID} in
     0)
-        updateports() 
+        updateports()
         {
             if [ -f /usr/ports/.portsnap.INDEX ]
             then
@@ -155,38 +154,23 @@ freebsd*)
 esac
 
 
+## color configuration
+#
+# LSCOLORS: BSD ls (macOS) 用 / LS_COLORS: GNU ls と補完候補用
+#export LSCOLORS=exfxcxdxbxegedabagacad
+#export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
+# 補完候補の色を LS_COLORS と連動させる
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
 ## terminal configuration
 #
-unset LSCOLORS
-case "${TERM}" in
-xterm)
-    export TERM=xterm-color
-    ;;
-kterm)
-    export TERM=kterm-color
-    # set BackSpace control character
-    stty erase
-    ;;
-cons25)
-    unset LANG
-    export LSCOLORS=ExFxCxdxBxegedabagacad
-    export LS_COLORS='di=01;34:ln=01;35:so=01;32:ex=01;31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors \
-        'di=;34;1' 'ln=;35;1' 'so=;32;1' 'ex=31;1' 'bd=46;34' 'cd=43;34'
-    ;;
-esac
-
 # set terminal title including current directory
 #
 case "${TERM}" in
-kterm*|xterm*)
+kterm*|xterm*|screen*|tmux*)
     precmd() {
         echo -ne "\033]0;${USER}@${HOST%%.*}:${PWD}\007"
     }
-    export LSCOLORS=exfxcxdxbxegedabagacad
-    export LS_COLORS='di=34:ln=35:so=32:pi=33:ex=31:bd=46;34:cd=43;34:su=41;30:sg=46;30:tw=42;30:ow=43;30'
-    zstyle ':completion:*' list-colors \
-        'di=34' 'ln=35' 'so=32' 'ex=31' 'bd=46;34' 'cd=43;34'
     ;;
 esac
 
@@ -209,7 +193,6 @@ alias -g G='| grep'
 alias -g W='| wc'
 alias -g S='| sed'
 alias -g A='| awk'
-alias -g W='| wc'
 
 stty stop undef
 stty start undef
@@ -222,13 +205,13 @@ preexec(){
 if [ -d ${HOME}/.rbenv ]; then
   export PATH=$HOME/.rbenv/bin:$PATH
   eval "$(rbenv init -)"
-  if [ -d ${HOME}/.rbenv/completions/rbenv.zsh ]; then
+  if [ -f ${HOME}/.rbenv/completions/rbenv.zsh ]; then
       . ~/.rbenv/completions/rbenv.zsh
   fi
 fi
 
 ### Added by the Heroku Toolbelt
-export PATH="~/bin:/usr/local/heroku/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/heroku/bin:$PATH"
 
 ## 各環境毎の設定を読み込む
 [ -f $ZDOTDIR/.zshrc_`uname` ] && . $ZDOTDIR/.zshrc_`uname`
@@ -236,11 +219,8 @@ export PATH="~/bin:/usr/local/heroku/bin:$PATH"
 ## ローカルの設定を読み込む
 [ -f $ZDOTDIR/.zshrc_local ] && . $ZDOTDIR/.zshrc_local
 
-# lv使うとgit diffのカラーコードが表示できない問題の対応
-export GIT_PAGER=less
-if [[ -x `whence -p lv` ]]; then
-  export GIT_PAGER="lv -c"
-fi
+# git diff の色を正しく表示するため less -R を使う
+export GIT_PAGER='less -R'
 
 # Android Studio
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -256,5 +236,5 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/Users/kitamura/.lmstudio/bin"
 # End of LM Studio CLI section
 
-export PATH="$PATH:/Users/kitamura/.local/bin"
+# NOTE: これが最後に先頭へ追加されるため、java は openjdk@21 ではなく @17 が優先される
 export PATH="/opt/homebrew/opt/openjdk@17/bin:$PATH"

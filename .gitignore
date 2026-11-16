@@ -1,1 +1,9 @@
 .zshrc_local
+
+# zsh が ZDOTDIR（このディレクトリ）に作るファイル
+.zcompdump*
+.zsh_history
+.zsh_sessions/
+
+# macOS
+.DS_Store
